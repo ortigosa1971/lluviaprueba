@@ -1,4 +1,3 @@
-// index.js
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
@@ -33,8 +32,34 @@ app.get('/lluvia', (req, res) => {
   res.json(data);
 });
 
+// ✅ Página de presentación en la raíz
 app.get('/', (req, res) => {
-  res.send('Servidor de lluvia activo.');
+  res.send(`
+    <html>
+      <head>
+        <title>Servidor de lluvia</title>
+        <style>
+          body {
+            background-color: #1e293b;
+            color: white;
+            font-family: sans-serif;
+            padding: 2rem;
+            text-align: center;
+          }
+          code {
+            background: #334155;
+            padding: 0.2rem 0.4rem;
+            border-radius: 5px;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>🌧️ Servidor de lluvia activo</h1>
+        <p>Consulta datos en: <code>/lluvia</code></p>
+        <p>Guardar datos vía <strong>POST</strong> en: <code>/guardar-lluvia</code></p>
+      </body>
+    </html>
+  `);
 });
 
 app.listen(PORT, () => {
