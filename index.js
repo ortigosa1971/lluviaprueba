@@ -26,6 +26,7 @@ app.post('/guardar-lluvia', (req, res) => {
   res.json({ message: 'Lluvia guardada correctamente' });
 });
 
+
 app.get('/lluvia', (req, res) => {
   if (!fs.existsSync(FILE_PATH)) return res.json({});
   const data = JSON.parse(fs.readFileSync(FILE_PATH));
