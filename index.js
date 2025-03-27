@@ -17,14 +17,30 @@ app.post('/guardar-lluvia', (req, res) => {
   }
 
   let data = {};
-  if (fs.existsSync(FILE_PATH)) {
-    data = JSON.parse(fs.readFileSync(FILE_PATH));
+
+  // Leer archivo con manejo de errores
+  try {
+    if (fs.existsSync(FILE_PATH)) {
+      const raw = fs.readFileSync(FILE_PATH);
+      data = JSON.parse(raw);
+    }
+  } catch (err) {
+    console.error('Error leyendo archivo:', err);
+    return res.status(500).json({ error: 'No se pudo leer el archivo' });
   }
 
+  // Guardar los nuevos datos
   data[`${year}-${month}`] = total;
-  fs.writeFileSync(FILE_PATH, JSON.stringify(data, null, 2));
-  res.json({ message: 'Lluvia guardada correctamente' });
+
+  try {
+    fs.writeFileSync(FILE_PATH, JSON.stringify(data, null, 2));
+    res.json({ message: 'Lluvia guardada correctamente' });
+  } catch (err) {
+    console.error('Error escribiendo archivo:', err);
+    res.status(500).json({ error: 'No se pudo guardar el archivo' });
+  }
 });
+
 
 
 app.get('/lluvia', (req, res) => {
