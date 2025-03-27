@@ -32,7 +32,7 @@ app.get('/lluvia', (req, res) => {
   res.json(data);
 });
 
-// ✅ Página de presentación en la raíz
+// ✅ Página visual en la raíz
 app.get('/', (req, res) => {
   res.send(`
     <html>
@@ -51,12 +51,20 @@ app.get('/', (req, res) => {
             padding: 0.2rem 0.4rem;
             border-radius: 5px;
           }
+          a {
+            color: #38bdf8;
+            text-decoration: underline;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 1rem;
+          }
         </style>
       </head>
       <body>
         <h1>🌧️ Servidor de lluvia activo</h1>
-        <p>Consulta datos en: <code>/lluvia</code></p>
-        <p>Guardar datos vía <strong>POST</strong> en: <code>/guardar-lluvia</code></p>
+        <p>Consulta datos en <code>/lluvia</code></p>
+        <p>Envía datos con <code>POST /guardar-lluvia</code></p>
+        <a href="https://estacion-meteoalfa.onrender.com" target="_blank">🌐 Ver la interfaz meteorológica</a>
       </body>
     </html>
   `);
