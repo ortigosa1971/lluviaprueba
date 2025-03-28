@@ -15,7 +15,6 @@ app.post('/guardar-lluvia', (req, res) => {
   if (!year || !month || typeof total !== 'number') {
     return res.status(400).json({ error: 'Datos inválidos' });
   }
-
   let data = {};
 
   // Leer archivo con manejo de errores
